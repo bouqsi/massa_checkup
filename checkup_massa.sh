@@ -10,13 +10,13 @@ fi
 echo "_________________________"
 echo ""
 echo "Vérification de l'ouveture des ports [succeeded c'est OK] - [failed = vos ports sont fermés]..."
-nc -z -v YOUR_NODE_IP 31244-31245
+nc -z -v $(hostname -I | awk -F " " {'print $1'}) 31244-31245
 echo "Done!"
 echo "_________________________"
 echo ""
 echo "Vérification du nombre de roll..."
 cd ~/massa/massa-client
-tout=$(~/massa/target/release/massa-client wallet_info)
+tout=$($HOME/massa/target/release/massa-client wallet_info)
 nActiveRolls=$(echo "$tout" | grep "Active rolls" | awk -F " " {'print $3'})
 echo "Nombre de roll actif : $nActiveRolls"
 if [[ "$nActiveRolls" > 0 ]]; then
@@ -27,7 +27,7 @@ fi
 echo "_________________________"
 echo ""
 echo "Vérification de la version de votre node..."
-version=$(~/massa/target/release/massa-client get_status)
+version=$($HOME/massa/target/release/massa-client get_status)
 echo "$version" | grep "Version"
 echo "_________________________"
 echo ""
