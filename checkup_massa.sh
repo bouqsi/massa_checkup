@@ -10,7 +10,7 @@ fi
 echo "_________________________"
 echo ""
 echo "Vérification de l'ouveture des ports [succeeded c'est OK] - [failed = vos ports sont fermés]..."
-nc -z -v YOUR_IP 31244-31245
+nc -z -v YOUR_NODE_IP 31244-31245
 echo "Done!"
 echo "_________________________"
 echo ""
@@ -29,4 +29,10 @@ echo ""
 echo "Vérification de la version de votre node..."
 version=$(~/massa/target/release/massa-client get_status)
 echo "$version" | grep "Version"
-
+echo "_________________________"
+echo ""
+echo "Hardware requis minimum actuel : 4 core / 8GB RAM"
+echo "Vos specs actuels : "
+lscpu | grep "CPU(s)" | head -1
+echo "Utilisation de la RAM : "
+free -h
