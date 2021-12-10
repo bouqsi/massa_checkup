@@ -36,3 +36,6 @@ echo "Vos specs actuels : "
 lscpu | grep "CPU(s)" | head -1
 echo "Utilisation de la RAM : "
 free -h
+echo ""
+echo "Pourcentage d'utilisation du CPU : "
+ps -p $(pgrep massa-node) -o %cpu,%mem
