@@ -10,7 +10,7 @@ fi
 echo "_________________________"
 echo ""
 echo "Vérification de l'ouveture des ports [succeeded c'est OK] - [failed = vos ports sont fermés]..."
-nc -z -v 207.180.242.233 31244-31245
+nc -z -v YOUR_IP 31244-31245
 echo "Done!"
 echo "_________________________"
 echo ""
