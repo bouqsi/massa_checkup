@@ -1,6 +1,7 @@
 #!/bin/bash
 IFS=', '
 FILE=$HOME/massa/massa-node/config/config.toml
+adresse="Votre adresse de staking ici"
 if [ -f "$FILE" ]; then
     echo "Le fichier $FILE existe. Voici son contenu : "
     cat "$FILE"
@@ -19,7 +20,13 @@ echo "Vérification du nombre de roll..."
 cd ~/massa/massa-client
 tout=$($HOME/massa/target/release/massa-client wallet_info)
 nActiveRolls=$(echo "$tout" | grep "Active rolls" | awk -F " " {'print $3'})
+FinalRolls=$(echo "$tout" | grep "Final rolls" | awk -F " " {'print $3'})
+CandidateRolls=$(echo "$tout" | grep "Candidate rolls" | awk -F " " {'print $3'})
+FinalBalance=$(echo "$tout" | grep "Final balance" | awk -F " " {'print $3'})
 echo "Nombre de roll actif : $nActiveRolls"
+echo "Final rolls : $FinalRolls"
+echo "Candidate rolls : $CandidateRolls"
+echo "Final balance : $FinalBalance"
 if [[ "$nActiveRolls" > 0 ]]; then
     echo "Vous avez au moins un roll d'actif"
 else
@@ -58,7 +65,7 @@ while true; do
 		   ;;
             [2]* )
 		   cd $HOME/massa/massa-client
-		   lancement=$($HOME/massa/target/release/massa-client buy_rolls 1 0)
+		   lancement=$($HOME/massa/target/release/massa-client buy_rolls $adresse 1 0)
 		   echo "Achat de roll : $lancement"
 		   ;;
             [3]* ) exit;;
