@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=', '
 FILE=$HOME/massa/massa-node/config/config.toml
-adresse="Votre adresse de staking ici"
+adresse="2Z2T99U9S1tc7BYRESLYaoKmaWnBYLr4EGb8b9C9Ka7yuQZ4Yx"
 if [ -f "$FILE" ]; then
     echo "Le fichier $FILE existe. Voici son contenu : "
     cat "$FILE"
@@ -50,10 +50,10 @@ ps -p $(pgrep massa-node) -o %cpu,%mem
 echo "_________________________"
 echo ""
 echo ""
-printf "Que voulez-vous faire ?\n\n1) Relancer le Massa Node\n2) Acheter un roll\n3) Quitter\n\n"
+printf "Que voulez-vous faire ?\n\n1) Relancer le Massa Node\n2) Acheter un roll\n3) Consulter le wallet\n\n"
 
 while true; do
-    read -p "Faites votre choix : [1] [2] [3] [E]xit: " -a array
+    read -p "Faites votre choix : [1] [2] [3] [Q]uitter: " -a array
     for choice in "${array[@]}"; do
         case "$choice" in
             [1]* )
@@ -68,8 +68,19 @@ while true; do
 		   lancement=$($HOME/massa/target/release/massa-client buy_rolls $adresse 1 0)
 		   echo "Achat de roll : $lancement"
 		   ;;
-            [3]* ) exit;;
-            [Ee]* ) echo "Vous avez quitter le programme."; exit;;
+            [3]* )
+		   nActiveRolls=$(echo "$tout" | grep "Active rolls" | awk -F " " {'print $3'})
+		   FinalRolls=$(echo "$tout" | grep "Final rolls" | awk -F " " {'print $3'})
+		   CandidateRolls=$(echo "$tout" | grep "Candidate rolls" | awk -F " " {'print $3'})
+		   FinalBalance=$(echo "$tout" | grep "Final balance" | awk -F " " {'print $3'})
+		   echo ""
+		   echo "Nombre de roll actif : $nActiveRolls"
+		   echo "Final rolls : $FinalRolls"
+		   echo "Candidate rolls : $CandidateRolls"
+		   echo "Final balance : $FinalBalance"
+		   echo ""
+		   ;;
+            [Qq]* ) echo "Vous avez quitter le programme."; exit;;
             * ) echo "C'est une blague :)) ???";;
         esac
     done
