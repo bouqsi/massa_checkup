@@ -27,8 +27,12 @@ echo "Nombre de roll actif : $nActiveRolls"
 echo "Final rolls : $FinalRolls"
 echo "Candidate rolls : $CandidateRolls"
 echo "Final balance : $FinalBalance"
-if [[ "$nActiveRolls" > 0 ]]; then
-    echo "Vous avez au moins un roll d'actif"
+if [[ "$CandidateRolls" == 1 ]]; then
+    echo ""
+    echo "L'achat de votre roll est en cours. Patientez environ 1h45."
+elif [[ "$nActiveRolls" > 0 ]]; then
+    echo ""
+    echo "Vous avez au moins un roll d'actif."
 else
     echo "Vous n'avez aucun roll d'actif! Il faut en acheter."
 fi
@@ -69,6 +73,8 @@ while true; do
 		   echo "Achat de roll : $lancement"
 		   ;;
             [3]* )
+		   #cd $HOME/massa/massa-client
+		   #wallet=$($HOME/massa/target/release/massa-client wallet_info)
 		   nActiveRolls=$(echo "$tout" | grep "Active rolls" | awk -F " " {'print $3'})
 		   FinalRolls=$(echo "$tout" | grep "Final rolls" | awk -F " " {'print $3'})
 		   CandidateRolls=$(echo "$tout" | grep "Candidate rolls" | awk -F " " {'print $3'})
