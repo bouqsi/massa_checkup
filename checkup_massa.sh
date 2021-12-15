@@ -1,4 +1,5 @@
 #!/bin/bash
+IFS=', '
 FILE=$HOME/massa/massa-node/config/config.toml
 if [ -f "$FILE" ]; then
     echo "Le fichier $FILE existe. Voici son contenu : "
@@ -39,3 +40,30 @@ free -h
 echo ""
 echo "Pourcentage d'utilisation du CPU : "
 ps -p $(pgrep massa-node) -o %cpu,%mem
+echo "_________________________"
+echo ""
+echo ""
+printf "Que voulez-vous faire ?\n\n1) Relancer le Massa Node\n2) Acheter un roll\n3) Quitter\n\n"
+
+while true; do
+    read -p "Faites votre choix : [1] [2] [3] [E]xit: " -a array
+    for choice in "${array[@]}"; do
+        case "$choice" in
+            [1]* )
+		   cd $HOME/massa/massa-node
+		   pkill massa-node
+		   nohup cargo run --release &
+		   echo "Lancement du Massa-node en cours..."
+		   sleep 4
+		   ;;
+            [2]* )
+		   cd $HOME/massa/massa-client
+		   lancement=$($HOME/massa/target/release/massa-client buy_rolls 1 0)
+		   echo "Achat de roll : $lancement"
+		   ;;
+            [3]* ) exit;;
+            [Ee]* ) echo "Vous avez quitter le programme."; exit;;
+            * ) echo "C'est une blague :)) ???";;
+        esac
+    done
+done
