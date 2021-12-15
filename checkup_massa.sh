@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=', '
 FILE=$HOME/massa/massa-node/config/config.toml
-adresse="2Z2T99U9S1tc7BYRESLYaoKmaWnBYLr4EGb8b9C9Ka7yuQZ4Yx"
+adresse="Votre adresse de staking ici"
 if [ -f "$FILE" ]; then
     echo "Le fichier $FILE existe. Voici son contenu : "
     cat "$FILE"
