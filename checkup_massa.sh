@@ -73,8 +73,6 @@ while true; do
 		   echo "Achat de roll : $lancement"
 		   ;;
             [3]* )
-		   #cd $HOME/massa/massa-client
-		   #wallet=$($HOME/massa/target/release/massa-client wallet_info)
 		   nActiveRolls=$(echo "$tout" | grep "Active rolls" | awk -F " " {'print $3'})
 		   FinalRolls=$(echo "$tout" | grep "Final rolls" | awk -F " " {'print $3'})
 		   CandidateRolls=$(echo "$tout" | grep "Candidate rolls" | awk -F " " {'print $3'})
