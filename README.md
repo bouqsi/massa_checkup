@@ -4,7 +4,7 @@ Ce script a pour but d'aider les utilisateurs de Massa Labs à avoir un premier 
 
 Placez le à la racine de votre user.
 
-wget https://raw.githubusercontent.com/bouqsi/massa_checkup/main/checkup_massa.sh & chmod +x checkup_massa.sh
+wget https://raw.githubusercontent.com/bouqsi/massa_checkup/main/checkup_massa.sh && chmod +x checkup_massa.sh
 
 Renseignez votre adresse de staking dans le fichier.
 
